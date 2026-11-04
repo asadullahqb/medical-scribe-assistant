@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Medical Scribe Assistant (POC)</title>
+    <link rel="manifest" href="./manifest.webmanifest" />
+    <meta name="theme-color" content="#0b3b49" />
+    <link rel="stylesheet" href="./styles.css" />
+    <link rel="icon" href="./favicon.svg" type="image/svg+xml" />
+  </head>
+  <body>
+    <header class="app-header">
+      <h1>AI Scribe – POC</h1>
+      <button id="settingsBtn" title="Settings" class="icon-btn">⚙️</button>
+    </header>
+
+    <main class="container">
+      <section class="card">
+        <div class="controls">
+          <button id="startBtn" class="primary">Start Ambient Session</button>
+          <button id="stopBtn" class="danger" disabled>Stop</button>
+          <button id="segmentBtn" class="ghost" title="Segment transcript into utterances">Segment</button>
+        </div>
+        <div class="status" id="status">Idle</div>
+        <textarea id="transcript" placeholder="Live transcript will appear here..." rows="10"></textarea>
+        <div class="small">Autosaved locally. You can edit before summarizing.</div>
+        <div class="controls">
+          <button id="summarizeBtn">Summarize to SOAP Note</button>
+          <button id="clearBtn" class="ghost">Clear</button>
+        </div>
+      </section>
+
+      <section class="card">
+        <h2>Clinical Note (SOAP)</h2>
+        <textarea id="note" placeholder="Press Summarize to generate..." rows="14"></textarea>
+        <div class="controls">
+          <button id="copyBtn">Copy</button>
+          <button id="downloadBtn" class="ghost">Download .md</button>
+        </div>
+      </section>
+    </main>
+
+    <dialog id="settingsDialog">
+      <form method="dialog">
+        <h3>Settings</h3>
+        <label class="field">
+          <span>API base URL</span>
+          <input id="apiUrl" type="url" placeholder="http://localhost:8787" />
+        </label>
+        <label class="field">
+          <span>Language (ASR)</span>
+          <input id="lang" type="text" placeholder="en-US" />
+        </label>
+        <menu class="controls">
+          <button value="cancel" class="ghost">Cancel</button>
+          <button id="saveSettings" value="default">Save</button>
+        </menu>
+      </form>
+    </dialog>
+
+    <script src="./main.js" type="module"></script>
+    <script>
+      if (location.origin.startsWith('http') && 'serviceWorker' in navigator) {
+        navigator.serviceWorker.register('./sw.js');
+      }
+    </script>
+  </body>
+  </html>
+
+

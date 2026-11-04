@@ -1,0 +1,11 @@
+{
+  "name": "Medical Scribe Assistant (POC)",
+  "short_name": "AI Scribe",
+  "start_url": "/index.html",
+  "display": "standalone",
+  "background_color": "#081c24",
+  "theme_color": "#0b3b49",
+  "icons": []
+}
+
+
